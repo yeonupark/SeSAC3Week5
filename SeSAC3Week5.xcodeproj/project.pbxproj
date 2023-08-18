@@ -25,6 +25,8 @@
 		4804793A2A8C75290012E33E /* HeaderPosterCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 480479382A8C75290012E33E /* HeaderPosterCollectionReusableView.swift */; };
 		4804793B2A8C75290012E33E /* HeaderPosterCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 480479392A8C75290012E33E /* HeaderPosterCollectionReusableView.xib */; };
 		4804793D2A8C77A80012E33E /* PosterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4804793C2A8C77A80012E33E /* PosterViewController.swift */; };
+		482906342A8EF03800B45D84 /* cachildren kkum.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 482906322A8EF03700B45D84 /* cachildren kkum.ttf */; };
+		482906352A8EF03800B45D84 /* cachildren modu.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 482906332A8EF03800B45D84 /* cachildren modu.ttf */; };
 		48914ADB2A8DA32C009A1E13 /* Extenstion+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48914ADA2A8DA32C009A1E13 /* Extenstion+Alert.swift */; };
 		48914ADF2A8DAB84009A1E13 /* LottoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48914ADE2A8DAB84009A1E13 /* LottoManager.swift */; };
 		48914AE12A8DB24D009A1E13 /* ReuasableViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48914AE02A8DB24C009A1E13 /* ReuasableViewProtocol.swift */; };
@@ -54,6 +56,8 @@
 		480479382A8C75290012E33E /* HeaderPosterCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderPosterCollectionReusableView.swift; sourceTree = "<group>"; };
 		480479392A8C75290012E33E /* HeaderPosterCollectionReusableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderPosterCollectionReusableView.xib; sourceTree = "<group>"; };
 		4804793C2A8C77A80012E33E /* PosterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PosterViewController.swift; sourceTree = "<group>"; };
+		482906322A8EF03700B45D84 /* cachildren kkum.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "cachildren kkum.ttf"; sourceTree = "<group>"; };
+		482906332A8EF03800B45D84 /* cachildren modu.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "cachildren modu.ttf"; sourceTree = "<group>"; };
 		48914ADA2A8DA32C009A1E13 /* Extenstion+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extenstion+Alert.swift"; sourceTree = "<group>"; };
 		48914ADE2A8DAB84009A1E13 /* LottoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottoManager.swift; sourceTree = "<group>"; };
 		48914AE02A8DB24C009A1E13 /* ReuasableViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReuasableViewProtocol.swift; sourceTree = "<group>"; };
@@ -97,6 +101,7 @@
 		041AE3CB2A899B28007724AE /* SeSAC3Week5 */ = {
 			isa = PBXGroup;
 			children = (
+				482906312A8EEFEF00B45D84 /* Font */,
 				48B57C562A8DEB7D003643CE /* TMDB */,
 				48B57C4E2A8DC926003643CE /* Weather */,
 				48914ADD2A8DAB73009A1E13 /* Lotto */,
@@ -137,6 +142,15 @@
 			);
 			name = View;
 			path = "퍋ㅈ";
+			sourceTree = "<group>";
+		};
+		482906312A8EEFEF00B45D84 /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				482906322A8EF03700B45D84 /* cachildren kkum.ttf */,
+				482906332A8EF03800B45D84 /* cachildren modu.ttf */,
+			);
+			path = Font;
 			sourceTree = "<group>";
 		};
 		48914ADC2A8DA341009A1E13 /* Extension */ = {
@@ -243,10 +257,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				041AE3E22A899D1C007724AE /* .gitignore in Resources */,
+				482906352A8EF03800B45D84 /* cachildren modu.ttf in Resources */,
 				4804793B2A8C75290012E33E /* HeaderPosterCollectionReusableView.xib in Resources */,
 				041AE3D92A899B29007724AE /* LaunchScreen.storyboard in Resources */,
 				480479372A8C75060012E33E /* PosterCollectionViewCell.xib in Resources */,
 				041AE3D62A899B29007724AE /* Assets.xcassets in Resources */,
+				482906342A8EF03800B45D84 /* cachildren kkum.ttf in Resources */,
 				041AE3D42A899B28007724AE /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

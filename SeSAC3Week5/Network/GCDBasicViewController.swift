@@ -12,8 +12,43 @@ class GCDBasicViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
  
-        globalAsyncTwo()
+        dispatchGrounp()
     }
+    
+    func dispatchGrounp() {
+        
+        let group = DispatchGroup()
+            
+        DispatchQueue.global().async(group: group) {
+            for i in 1...100 {
+                print(i, terminator: " ")
+            }
+        }
+        
+        DispatchQueue.global().async(group: group) {
+            for i in 101...200 {
+                print(i, terminator: " ")
+            }
+        }
+        
+        DispatchQueue.global().async(group: group) {
+            for i in 201...300 {
+                print(i, terminator: " ")
+            }
+        }
+        
+        DispatchQueue.global().async(group: group) {
+            for i in 301...400 {
+                print(i, terminator: " ")
+            }
+        }
+        
+        group.notify(queue: .main) {
+            print("END")
+            // 컬렉션 뷰에 대한 갱신 등의 코드 요기서 .
+        }
+    }
+    
     
     func globalAsyncTwo() {
         print("Start")

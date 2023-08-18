@@ -25,27 +25,53 @@ class PosterViewController: UIViewController {
     var thirdList = Recommendation(results: [], page: 0, totalPages: 0, totalResults: 0)
     var fourthList = Recommendation(results: [], page: 0, totalPages: 0, totalResults: 0)
     
+    @IBAction func sendNotification(_ sender: UIButton) {
+        
+        // 포그라운드에서 알림이 안뜨는게 디폴트. 백그라운드모드에서만 알림이 뜨는게 애플의 정책이다
+        
+        //1. 컨텐츠
+        let content = UNMutableNotificationContent()
+        content.title = "다마고치에게 물을 \(Int.random(in: 10...100))모금 주세요"
+        content.body = "아직 레벨 3이에요. 물을 주세요!!"
+        content.badge = 100
+        
+        // 2. 언제
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 10, repeats: false)
+        
+        // -> 알림 보내 !
+        let request = UNNotificationRequest(identifier: "\(Date())", content: content, trigger: trigger)
+        
+        UNUserNotificationCenter.current().add(request) { error in
+            print(error)
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // 스유니 569094 엘리멘탈 976573 오펜 872585 노웨이홈 634649
-        RecommendManager.shared.callRecommendation(id: 976573) { data in
-            self.list = data
+        
+        let id = [976573,872585,13,634649]
+        let group = DispatchGroup()
+        
+        for item in id {
+            
+            group.enter() //
+            RecommendManager.shared.callRecommendation(id: item) { data in
+                if item == 13 {
+                    self.thirdList = data
+                }
+                group.leave() //
+            }
+        }
+        group.notify(queue: .main) {
             self.posterCollectionView.reloadData()
         }
         
-        RecommendManager.shared.callRecommendation(id: 872585) { data in
-            self.secondList = data
-            self.posterCollectionView.reloadData()
-        }
-        
-        RecommendManager.shared.callRecommendation(id: 13) { data in
-            self.thirdList = data
-            self.posterCollectionView.reloadData()
-        }
-        RecommendManager.shared.callRecommendation(id: 634649) { data in
-            self.fourthList = data
-            self.posterCollectionView.reloadData()
-        }
+//        for item in UIFont.familyNames {
+//            print(item)
+//            for name in UIFont.fontNames(forFamilyName: item) {
+//                print("=== \(name) ===")
+//            }
+//        }
         
         // LottoManager().callLotto() // 인스턴스를 매번 생성하게 됨
         //LottoManager.shared.callLotto() // 타입 프로퍼티 사용
@@ -59,7 +85,78 @@ class PosterViewController: UIViewController {
         configureCollectionViewLayout()
     }
     
+    func dispatchGroupEnterLeave() {
+        let group = DispatchGroup()
+        
+        group.enter() // + 1 (작업이 하나 추가되었구나!)
+        RecommendManager.shared.callRecommendation(id: 976573) { data in
+            self.list = data
+            print("1")
+            group.leave() // -1 (작업 하나 완료 했구낭)
+        }
+        
+        group.enter()
+        RecommendManager.shared.callRecommendation(id: 872585) { data in
+            self.secondList = data
+            print("2")
+            group.leave()
+        }
+        
+        group.enter()
+        RecommendManager.shared.callRecommendation(id: 13) { data in
+            self.thirdList = data
+            print("3")
+            group.leave()
+        }
+        
+        group.enter()
+        RecommendManager.shared.callRecommendation(id: 634649) { data in
+            self.fourthList = data
+            print("4")
+            group.leave()
+        }
+        group.notify(queue: .main){
+            print("5")
+            self.posterCollectionView.reloadData()
+        }
+    }
     
+    func dispatchGroupNotify() {
+        let group = DispatchGroup()
+        
+        DispatchQueue.global().async(group: group){
+            RecommendManager.shared.callRecommendation(id: 976573) { data in
+                self.list = data
+                print("1")
+            }
+        }
+        
+        DispatchQueue.global().async(group: group){
+            RecommendManager.shared.callRecommendation(id: 872585) { data in
+                self.secondList = data
+                print("2")
+            }
+        }
+        
+        DispatchQueue.global().async(group: group){
+            RecommendManager.shared.callRecommendation(id: 13) { data in
+                self.thirdList = data
+                print("3")
+            }
+        }
+        
+        DispatchQueue.global().async(group: group){
+            RecommendManager.shared.callRecommendation(id: 634649) { data in
+                self.fourthList = data
+                print("4")
+            }
+        }
+        
+        group.notify(queue: .main) {
+            self.posterCollectionView.reloadData()
+            print("5")
+        }
+    }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -131,6 +228,7 @@ extension PosterViewController: UICollectionViewDelegate, UICollectionViewDataSo
             guard let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HeaderPosterCollectionReusableView.identifier, for: indexPath) as? HeaderPosterCollectionReusableView else { return UICollectionReusableView()}
             
             view.titleLabel.text = "테스트섹션"
+            view.titleLabel.font = UIFont(name: "cachildren-modu", size: 24)
             
             return view
         }
