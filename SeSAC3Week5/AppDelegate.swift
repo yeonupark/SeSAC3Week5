@@ -42,8 +42,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 extension AppDelegate: UNUserNotificationCenterDelegate {
     
-    // 앱이 포그라운드에 있어도 알림이 오게끔 설정하는 메서드
+    // 앱이 포그라운드에 있어도 알림이 오게끔 설정하는 메서드: willPresent
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        
+        // 특정 화면, 특정 조건에서만 포그라운드 알림 받기 (1:1 채팅 등)
+        // 특정 화면에서는 안 받기
+        
         completionHandler([.sound, .badge, .banner, .list])
     }
+    
+    // 특정 푸시 클릭하면 특정 화면으로 이동
+    // 알람 개수 제한 : 64개 제한 (identifier)
+    // 카톡: 앱 실행하면 쌓인 알림 다 사라짐
 }

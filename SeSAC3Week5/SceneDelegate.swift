@@ -31,6 +31,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.
         
         UIApplication.shared.applicationIconBadgeNumber = 0
+        // 사용자에게 이미 전달된 노티
+        UNUserNotificationCenter.current().removeAllDeliveredNotifications()
+        // 사용자에게 전달될 예정인 노티 >>> 장보기 알림 받기 대기 상태에서 내가 장보기를 지워버린다면 ?
+        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
         
     }
 

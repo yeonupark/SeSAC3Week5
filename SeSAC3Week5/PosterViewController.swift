@@ -27,7 +27,7 @@ class PosterViewController: UIViewController {
     
     @IBAction func sendNotification(_ sender: UIButton) {
         
-        // 포그라운드에서 알림이 안뜨는게 디폴트. 백그라운드모드에서만 알림이 뜨는게 애플의 정책이다
+        // 포그라운드에서 알림이 안뜨는게 디폴트. 백그라운드모드에서만 알림이 뜨는게 애플의 정책이다 -> appldelegate에서 설정 바꿈
         
         //1. 컨텐츠
         let content = UNMutableNotificationContent()
@@ -36,7 +36,15 @@ class PosterViewController: UIViewController {
         content.badge = 100
         
         // 2. 언제
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 10, repeats: false)
+        // 타임 인터벌
+        //let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 10, repeats: false)
+        
+        // 캘린더 기반
+        var component = DateComponents() // DateComponents 구조체가 미리 생성되어 있음
+        component.hour = 10
+        component.minute = 10
+        
+        let trigger = UNCalendarNotificationTrigger(dateMatching: component, repeats: true)
         
         // -> 알림 보내 !
         let request = UNNotificationRequest(identifier: "\(Date())", content: content, trigger: trigger)
